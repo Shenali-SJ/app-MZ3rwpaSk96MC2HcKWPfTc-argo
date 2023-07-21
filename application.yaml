@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: success
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Shenali-SJ/app-MZ3rwpaSk96MC2HcKWPfTc-helm.git
+    targetRevision: main
+    path: ./
+    helm:
+      valueFiles:
+      - values.yaml
+  destination:
+    server: default
+    namespace: argoapp
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
